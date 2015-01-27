@@ -29,12 +29,13 @@ public class TaskListActivity extends ActionBarActivity {
     private static final int NEW_TASK_REQUEST = 20;
     private ArrayList<Task> mTasks;
     private int mLastPositionClicked;
-    private TaskAdapter mTaskAdapter;
+    public TaskAdapter mTaskAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
 
         mTasks = new ArrayList<>();
         mTasks.add(new Task());
@@ -61,6 +62,7 @@ public class TaskListActivity extends ActionBarActivity {
                 Task task = (Task) parent.getAdapter().getItem(position);
                 i.putExtra(TaskActivity.EXTRA, task);
                 startActivityForResult(i, EDIT_TASK_REQUEST);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_up_out);
             }
         });
 
