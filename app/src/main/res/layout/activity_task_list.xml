@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/footer_text2"
-        android:text="THIS ALSO WORKS FFS"
+        android:text="THIS ALSO WORKS FFSxcv"
         android:textSize="30sp"
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
