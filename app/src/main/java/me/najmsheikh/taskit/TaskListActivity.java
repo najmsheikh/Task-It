@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,6 @@ public class TaskListActivity extends ActionBarActivity {
     private ArrayList<Task> mTasks;
     private int mLastPositionClicked;
     private TaskAdapter mTaskAdapter;
-    public TextView mTextView = (TextView) findViewById(R.id.footer_text);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class TaskListActivity extends ActionBarActivity {
 
         final ListView listView = (ListView) findViewById(R.id.task_list);
         mTaskAdapter = new TaskAdapter(mTasks);
+//        listView.addFooterView(LayoutInflater.from(this).inflate(R.layout.footer, null),mTextView,false);
         listView.setAdapter(mTaskAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,7 +63,7 @@ public class TaskListActivity extends ActionBarActivity {
                 startActivityForResult(i, EDIT_TASK_REQUEST);
             }
         });
-        listView.addFooterView(mTextView);
+
 //        registerForContextMenu(listView);
 
 
