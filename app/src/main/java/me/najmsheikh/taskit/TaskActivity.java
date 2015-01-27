@@ -32,7 +32,7 @@ public class TaskActivity extends ActionBarActivity {
         setContentView(R.layout.activity_task);
 
         mTask = (Task) getIntent().getSerializableExtra(EXTRA);
-        if(mTask == null)
+        if (mTask == null)
             mTask = new Task();
 
         mCal = Calendar.getInstance();
@@ -42,10 +42,10 @@ public class TaskActivity extends ActionBarActivity {
         Button saveButton = (Button) findViewById(R.id.task_savebutton);
 
         mTaskNameInput.setText(mTask.getName());
-        if(mTask.getDueDate() == null){
+        if (mTask.getDueDate() == null) {
             mCal.setTime(new Date());
             mDateButton.setText(getResources().getText(R.string.no_date));
-        }else{
+        } else {
             mCal.setTime(mTask.getDueDate());
             DateFormat df = DateFormat.getDateInstance();
             mDateButton.setText(df.format(mTask.getDueDate()));
@@ -83,7 +83,7 @@ public class TaskActivity extends ActionBarActivity {
                 Intent i = new Intent();
                 i.putExtra(EXTRA, mTask);
                 setResult(RESULT_OK, i);
-                Toast.makeText(getApplicationContext(),"Saved",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

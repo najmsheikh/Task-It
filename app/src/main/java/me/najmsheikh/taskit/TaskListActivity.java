@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,21 +90,21 @@ public class TaskListActivity extends ActionBarActivity {
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                 int id = item.getItemId();
-                int ct=0;
+                int ct = 0;
                 SparseBooleanArray positions = listView.getCheckedItemPositions();
                 if (id == R.id.delete_task_item) {
-                    for (int i=positions.size()-1;i>=0;i--){
-                        if(positions.valueAt(i)){
+                    for (int i = positions.size() - 1; i >= 0; i--) {
+                        if (positions.valueAt(i)) {
                             ct++;
                             mTasks.remove(positions.keyAt(i));
                         }
                     }
                     mode.finish();
                     mTaskAdapter.notifyDataSetChanged();
-                    if(ct>1)
-                        Toast.makeText(getApplicationContext(),ct+" tasks deleted", Toast.LENGTH_SHORT).show();
+                    if (ct > 1)
+                        Toast.makeText(getApplicationContext(), ct + " tasks deleted", Toast.LENGTH_SHORT).show();
                     else
-                        Toast.makeText(getApplicationContext(),"Deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -116,7 +116,6 @@ public class TaskListActivity extends ActionBarActivity {
         });
 //END CONTEXTUAL ACTION BAR
     }
-
 
 
     @Override
@@ -142,6 +141,7 @@ public class TaskListActivity extends ActionBarActivity {
         }
     }
 
+    //POPULATE LISTVIEW WITH DATA
     public class TaskAdapter extends ArrayAdapter<Task> {
         TaskAdapter(ArrayList<Task> tasks) {
             super(TaskListActivity.this, R.layout.task_list_row, R.id.task_item_name, tasks);
@@ -152,15 +152,16 @@ public class TaskListActivity extends ActionBarActivity {
             convertView = super.getView(position, convertView, parent);
             Task task = getItem(position);
 
-            TextView taskName = (TextView) convertView.findViewById(R.id.task_item_name);
+            CheckedTextView taskName = (CheckedTextView) convertView.findViewById(R.id.task_item_name);
             taskName.setText(task.getName());
+            taskName.setChecked(task.isDone());
 
             TextView taskDate = (TextView) convertView.findViewById(R.id.task_item_date);
             DateFormat df = DateFormat.getDateInstance();
-            if(task.getDueDate() != null) taskDate.setText(df.format(task.getDueDate()));
+            if (task.getDueDate() != null) taskDate.setText(df.format(task.getDueDate()));
 
-            CheckBox doneBox = (CheckBox) convertView.findViewById(R.id.task_item_done);
-            doneBox.setChecked(task.isDone());
+//            CheckBox doneBox = (CheckBox) convertView.findViewById(R.id.task_item_done);
+//            doneBox.setChecked(task.isDone());
 
             return convertView;
         }

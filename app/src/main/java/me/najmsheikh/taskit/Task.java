@@ -3,9 +3,6 @@ package me.najmsheikh.taskit;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by Najm on 1/20/2015.
- */
 public class Task implements Serializable {
 
     private String mName;
@@ -36,7 +33,7 @@ public class Task implements Serializable {
         DueDate = dueDate;
     }
 
-    public String toString(){
+    public String toString() {
         return mName;
     }
 }
