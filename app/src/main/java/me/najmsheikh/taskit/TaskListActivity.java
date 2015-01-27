@@ -30,11 +30,13 @@ public class TaskListActivity extends ActionBarActivity {
     private ArrayList<Task> mTasks;
     private int mLastPositionClicked;
     private TaskAdapter mTaskAdapter;
-
+    private TextView mTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
+
+        mTextView = (TextView) findViewById(R.id.footer_text);
 
         mTasks = new ArrayList<>();
         mTasks.add(new Task());
@@ -50,7 +52,7 @@ public class TaskListActivity extends ActionBarActivity {
 
         final ListView listView = (ListView) findViewById(R.id.task_list);
         mTaskAdapter = new TaskAdapter(mTasks);
-//        listView.addFooterView(LayoutInflater.from(this).inflate(R.layout.footer, null),mTextView,false);
+        listView.addFooterView(LayoutInflater.from(this).inflate(R.layout.footer, null),mTextView,false);
         listView.setAdapter(mTaskAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
