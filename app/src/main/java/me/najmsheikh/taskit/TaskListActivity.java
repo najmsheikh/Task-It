@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,13 +31,13 @@ public class TaskListActivity extends ActionBarActivity {
     private ArrayList<Task> mTasks;
     private int mLastPositionClicked;
     private TaskAdapter mTaskAdapter;
-    private TextView mTextView;
+//    private TextView mTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
 
-        mTextView = (TextView) findViewById(R.id.footer_text);
+//        mTextView = (TextView) findViewById(R.id.footer_text);
 
         mTasks = new ArrayList<>();
         mTasks.add(new Task());
@@ -52,7 +53,7 @@ public class TaskListActivity extends ActionBarActivity {
 
         final ListView listView = (ListView) findViewById(R.id.task_list);
         mTaskAdapter = new TaskAdapter(mTasks);
-        listView.addFooterView(LayoutInflater.from(this).inflate(R.layout.footer, null),mTextView,false);
+        listView.addFooterView(LayoutInflater.from(this).inflate(R.layout.footer, null),null,false);
         listView.setAdapter(mTaskAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -156,6 +157,10 @@ public class TaskListActivity extends ActionBarActivity {
 
             TextView taskName = (TextView) convertView.findViewById(R.id.task_item_name);
             taskName.setText(task.getName());
+
+            TextView taskDate = (TextView) convertView.findViewById(R.id.task_item_date);
+            DateFormat df = DateFormat.getDateInstance();
+            if(task.getDueDate() != null) taskDate.setText(df.format(task.getDueDate()));
 
             CheckBox doneBox = (CheckBox) convertView.findViewById(R.id.task_item_done);
             doneBox.setChecked(task.isDone());
