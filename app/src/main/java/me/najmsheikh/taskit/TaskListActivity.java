@@ -188,6 +188,7 @@ public class TaskListActivity extends ActionBarActivity {
         if (id == R.id.add_task_item) {
             Intent i = new Intent(getApplicationContext(), TaskActivity.class);
             startActivityForResult(i, NEW_TASK_REQUEST);
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_up_out);
         }
 
         return super.onOptionsItemSelected(item);
