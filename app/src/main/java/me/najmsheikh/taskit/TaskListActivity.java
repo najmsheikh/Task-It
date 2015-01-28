@@ -29,7 +29,8 @@ public class TaskListActivity extends ActionBarActivity {
     private static final int NEW_TASK_REQUEST = 20;
     private ArrayList<Task> mTasks;
     private int mLastPositionClicked;
-    public TaskAdapter mTaskAdapter;
+    private TaskAdapter mTaskAdapter;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class TaskListActivity extends ActionBarActivity {
         mTasks.add(new Task());
         mTasks.get(3).setName("Task #4");
 
-        final ListView listView = (ListView) findViewById(R.id.task_list);
+        listView = (ListView) findViewById(R.id.task_list);
         mTaskAdapter = new TaskAdapter(mTasks);
 //        listView.addFooterView(LayoutInflater.from(this).inflate(R.layout.footer, null),null,false);
         listView.setAdapter(mTaskAdapter);
@@ -64,7 +65,7 @@ public class TaskListActivity extends ActionBarActivity {
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_up_out);
             }
         });
-
+        listView.setEmptyView(findViewById(R.id.no_task_splash2));
 //        registerForContextMenu(listView);
 
 
@@ -107,6 +108,7 @@ public class TaskListActivity extends ActionBarActivity {
                     else
                         Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
                 }
+
                 return true;
             }
 
