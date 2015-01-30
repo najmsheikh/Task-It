@@ -87,6 +87,7 @@ public class TaskActivity extends ActionBarActivity {
                 setResult(RESULT_OK, i);
                 Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
                 finish();
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_up_out);
             }
         });
     }
