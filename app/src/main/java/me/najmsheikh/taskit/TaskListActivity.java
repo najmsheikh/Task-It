@@ -211,4 +211,10 @@ public class TaskListActivity extends ActionBarActivity {
         }
         return super.onContextItemSelected(item);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_up_out);
+    }
 }
