@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class TaskListActivity extends ActionBarActivity {
@@ -38,16 +37,10 @@ public class TaskListActivity extends ActionBarActivity {
         setContentView(R.layout.activity_task_list);
 
         mTasks = new ArrayList<>();
-        mTasks.add(new Task());
-        mTasks.get(0).setName("Task #1");
-        mTasks.add(new Task());
-        mTasks.get(1).setName("Task #2");
-        mTasks.add(new Task());
-        mTasks.get(2).setDueDate(new Date());
-        mTasks.get(2).setDone(true);
-        mTasks.get(2).setName("Task #3");
-        mTasks.add(new Task());
-        mTasks.get(3).setName("Task #4");
+        for (int i = 0; i < 10; i++) {
+            mTasks.add(new Task());
+            mTasks.get(i).setName("Task #" + i);
+        }
 
         listView = (ListView) findViewById(R.id.task_list);
         mTaskAdapter = new TaskAdapter(mTasks);
