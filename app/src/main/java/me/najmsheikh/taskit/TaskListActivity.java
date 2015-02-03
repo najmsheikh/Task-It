@@ -37,10 +37,10 @@ public class TaskListActivity extends ActionBarActivity {
         setContentView(R.layout.activity_task_list);
 
         mTasks = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            mTasks.add(new Task());
-            mTasks.get(i).setName("Task #" + i);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            mTasks.add(new Task());
+//            mTasks.get(i).setName("Task #" + i);
+//        }
 
         listView = (ListView) findViewById(R.id.task_list);
         mTaskAdapter = new TaskAdapter(mTasks);
