@@ -7,7 +7,7 @@
               android:orientation="vertical"
               tools:context=".TaskListActivity">
 
-    <ListView
+    <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
         android:id="@+id/task_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

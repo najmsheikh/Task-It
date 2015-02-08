@@ -2,6 +2,7 @@ package me.najmsheikh.taskit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -19,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
+import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -32,7 +35,7 @@ public class TaskListActivity extends ActionBarActivity {
     private ArrayList<Task> mTasks;
     private int mLastPositionClicked;
     private TaskAdapter mTaskAdapter;
-    private ListView listView;
+    private DynamicListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class TaskListActivity extends ActionBarActivity {
             mTasks.get(i).setDueDate(new Date());
         }
 
-        listView = (ListView) findViewById(R.id.task_list);
+        listView = (DynamicListView) findViewById(R.id.task_list);
         mTaskAdapter = new TaskAdapter(mTasks);
         ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(mTaskAdapter);
         animationAdapter.setAbsListView(listView);
@@ -67,6 +70,15 @@ public class TaskListActivity extends ActionBarActivity {
             }
         });
         listView.setEmptyView(findViewById(R.id.no_task_splash2));
+        listView.enableSwipeToDismiss(new OnDismissCallback() {
+            @Override
+            public void onDismiss(@NonNull ViewGroup viewGroup, @NonNull int[] ints) {
+                for (int pos : ints) {
+                    mTasks.remove(pos);
+                    mTaskAdapter.notifyDataSetChanged();
+                }
+            }
+        });
 //        registerForContextMenu(listView);
 
 
