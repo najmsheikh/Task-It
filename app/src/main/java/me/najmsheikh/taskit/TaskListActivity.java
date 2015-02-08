@@ -18,8 +18,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class TaskListActivity extends ActionBarActivity {
@@ -36,16 +39,21 @@ public class TaskListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
 
+
         mTasks = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            mTasks.add(new Task());
-//            mTasks.get(i).setName("Task #" + i);
-//        }
+        for (int i = 0; i < 30; i++) {
+            mTasks.add(new Task());
+            mTasks.get(i).setName("Task #" + (i + 1));
+            mTasks.get(i).setDueDate(new Date());
+        }
 
         listView = (ListView) findViewById(R.id.task_list);
         mTaskAdapter = new TaskAdapter(mTasks);
+        ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(mTaskAdapter);
+        animationAdapter.setAbsListView(listView);
+
 //        listView.addFooterView(LayoutInflater.from(this).inflate(R.layout.footer, null),null,false);
-        listView.setAdapter(mTaskAdapter);
+        listView.setAdapter(animationAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
