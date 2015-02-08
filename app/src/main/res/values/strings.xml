@@ -10,4 +10,5 @@
     <string name="no_date">No Due Date Selected</string>
     <string name="add_task">Add Task</string>
     <string name="delete_task">Delete Task</string>
+    <string name="no_task_message">List seems a bit empty :c\n Why not add some tasks?</string>
 </resources>
